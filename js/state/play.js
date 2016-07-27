@@ -18,14 +18,14 @@ var play = {
 		this.balls = game.add.group();
 		this.balls.enableBody = true;
 		this.balls.physicsBodyType = Phaser.Physics.ARCADE;
-		this.balls.createMultiple(20, 'ball');
+		this.balls.createMultiple(50, 'ball');
 		this.balls.setAll('checkWorldBounds', true);
 		this.balls.setAll('outOfBoundsKill', true);
 
 		this.enemies = game.add.group();
 		this.enemies.enableBody = true;
 		this.enemies.physicsBodyType = Phaser.Physics.ARCADE;
-		this.enemies.createMultiple(20, 'enemy');
+		this.enemies.createMultiple(50, 'enemy');
 		
 		this.timeToCreateEnemy = Phaser.Timer.SECOND * 0.5;
 
@@ -118,6 +118,7 @@ var play = {
 	destroyEnemy: function (ball, enemy){
 		this.points++;
 		this.textPoints.text = 'Points: ' + this.points;
+
 		// kill enemy
 		ball.kill();
 		enemy.kill(); 
