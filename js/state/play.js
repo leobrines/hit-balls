@@ -98,7 +98,7 @@ var play = {
 		enemy.reset(randomX, randomY);
 
 		enemy.rotation = - game.math.degToRad(90) + game.physics.arcade.angleBetweenCenters(this.player, enemy);
-		game.physics.arcade.moveToObject(enemy, this.player, 200);
+		game.physics.arcade.moveToObject(enemy, this.player, 100);
 	},
 
 	shoot: function (){
@@ -111,7 +111,7 @@ var play = {
 
 			ball.rotation = game.physics.arcade.angleToPointer(ball);
 
-			game.physics.arcade.moveToPointer(ball, 500);
+			game.physics.arcade.moveToPointer(ball, 400);
 		}
 	},
 
