@@ -15,6 +15,16 @@ var play = {
 				fill: '#fff'
 			});
 
+		this.textPause = game.add.text(
+			game.world.centerX, game.world.centerY - 100,
+			'Pause', {
+				font: '2rem Sans-serif',
+				fill: '#fff'
+			});
+
+		this.textPause.anchor.set(0.5, 0.5);
+		this.textPause.visible = false;
+
 		this.balls = game.add.group();
 		this.balls.enableBody = true;
 		this.balls.physicsBodyType = Phaser.Physics.ARCADE;
@@ -35,8 +45,6 @@ var play = {
 			'esc': Phaser.KeyCode.ESC
 		});
 
-		this.keys['esc'].onDown.add(this.pause, this);
-
 		this.shoot();
 	},
 
@@ -44,10 +52,26 @@ var play = {
 		if (game.input.activePointer.isDown)
 			this.shoot();
 
+		if (this.keys['esc'].isDown){
+			game.paused = true;
+		}
+
 		this.player.rotation = game.physics.arcade.angleToPointer(this.player);
 
 		game.physics.arcade.collide(this.player, this.enemies, this.over, null, this);
 		game.physics.arcade.collide(this.balls, this.enemies, this.destroyEnemy, null, this);
+	},
+
+	paused: function (){
+		this.textPause.visible = true;
+		this.keys['esc'].isDown = false;
+	},
+
+	pauseUpdate: function (){
+		if (this.keys['esc'].isDown){
+			this.textPause.visible = false;
+			game.paused = !game.paused;
+		}
 	},
 
 	over: function (){
@@ -122,9 +146,5 @@ var play = {
 		// kill enemy
 		ball.kill();
 		enemy.kill(); 
-	},
-
-	pause: function (){
-		game.paused = !game.paused;
 	}
 };
