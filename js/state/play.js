@@ -56,6 +56,13 @@ var play = {
 			game.paused = true;
 		}
 
+		if (this.player.scale.x === 1){
+			game.add.tween(this.player.scale).to( { x: 1.05, y: 1.05 }, 600, Phaser.Easing.Linear.None, true);
+		}
+		else if (this.player.scale.x === 1.05){
+			game.add.tween(this.player.scale).to( { x: 1, y: 1 }, 600, Phaser.Easing.Linear.None, true);
+		}
+
 		this.player.rotation = game.physics.arcade.angleToPointer(this.player);
 
 		game.physics.arcade.collide(this.player, this.enemies, this.over, null, this);
